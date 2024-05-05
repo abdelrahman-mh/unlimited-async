@@ -1,0 +1,5 @@
+- [ ] User multi threading or processing to maximize the number of requests ber second
+- [ ] Use profiling tools
+- [ ] With python, create a chart app, that read the `benchmark_log.txt` file and handle it with a GUI chart
+- [ ] Make the Chart draw more better
+- [ ] Add more tests includes a large amount of request, like 10M, 100M

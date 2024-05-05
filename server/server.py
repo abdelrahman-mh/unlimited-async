@@ -2,10 +2,12 @@ import asyncio
 from aiohttp import web
 import random
 
+
 async def handle(request):
-    name = request.match_info.get('name', 'Anonymous')
+    name = request.match_info.get("name", "Anonymous")
     await asyncio.sleep(random.randint(0, 3))
-    return web.Response(text=f"With, {name}")
+    return web.Response(text=f"Response With: {name}")
+
 
 app = web.Application()
 app.add_routes([web.get("/{name}", handle)])
