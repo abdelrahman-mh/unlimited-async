@@ -1,0 +1,27 @@
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - '8080:8080'
+    volumes:
+      - server_data:/app
+    networks:
+      - my_network
+
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - server
+    volumes:
+      - client_data:/app
+    networks:
+      - my_network
+
+networks:
+  unlimited_async_network:
+
+volumes:
+  server_data:
+  client_data:
