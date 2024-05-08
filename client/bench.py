@@ -13,7 +13,7 @@ async def main():
 
         async def fetch(url):
             async with session.get(url) as response:
-                print(url)
+                # print(url)
                 return await response.read()
 
         await pl.task.each(

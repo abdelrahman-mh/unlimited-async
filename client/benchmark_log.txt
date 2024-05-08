@@ -1,6 +1,0 @@
-unlimited => Memory usage: 75920KB   Time: 18.33 seconds     CPU usage: 32% For 10K
-unlimited => Memory usage: 402924KB  Time: 157.43 seconds    CPU usage: 44% For 100K
-unlimited => Memory usage: 3639804KB Time: 1551.67 seconds   CPU usage: 38% For 1M
-
-unlimited V2 => Memory usage: 208560KB  Time: 154.63 seconds    CPU usage: 32% For 100K
-unlimited V2 => Memory usage: 1607608KB Time: 1522.06 seconds   CPU usage: 30% For 1M

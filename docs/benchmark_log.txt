@@ -1,0 +1,11 @@
+bench    => Memory usage: 75920KB   Time: 18.33s     CPU usage: 32% For 10K
+bench    => Memory usage: 402924KB  Time: 157.43s    CPU usage: 44% For 100K
+bench    => Memory usage: 764824KB  Time: 314.23s    CPU usage: 50% For 200K
+bench    => Memory usage: 1834304KB Time: 776.50s    CPU usage: 46% For 500K
+bench    => Memory usage: 3639804KB Time: 1551.67s   CPU usage: 38% For 1M
+
+bench_v2 => Memory usage: 62888KB   Time: 17.75s     CPU usage: 19% For 10K
+bench_v2 => Memory usage: 206204KB  Time: 154.36s    CPU usage: 31% For 100K
+bench_v2 => Memory usage: 365400KB  Time: 305.60s    CPU usage: 38% For 200K
+bench_v2 => Memory usage: 838940KB  Time: 763.01s    CPU usage: 44% For 500K
+bench_v2 => Memory usage: 1607608KB Time: 1522.06s   CPU usage: 30% For 1M

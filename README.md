@@ -1,11 +1,11 @@
 ## Unlimited Python Async Operations
 
-This method is inspired by the article [Making an Unlimited Number of Requests with Python aiohttp + pypeln](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95).
-
 Unlimited async operation with Python, e.g., performing an unlimited number of HTTP requests.
 
+> This method is inspired by the article [Making an Unlimited Number of Requests with Python aiohttp + pypeln](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95).
+
 - [Overview](#overview)
-- [Enhanced Method](#enhanced-method)
+- [Enhanced Method:](#enhanced-method)
 - [Results](#results)
 - [Setup](#setup)
 
@@ -84,9 +84,36 @@ asyncio.run(main())
 - 8GB Memory, CPU Intel(R) i3-10100F 3.60GHz - 8 Cors, 4 Core ber socket
 - **Docker version**: 26.1.0, build 9714adc
 
-Version 2 that use `asyncio.Semaphore` in `client/bench_v2.py`, is better then origin [Cristian Garcia](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95) method in `client/bench.py` file , just in memory usage, he lees then it almost by `50%`, but other thing like the time he takes and the CUP usage they almost same.
+Method Version 2 that use `asyncio.Semaphore` in `client/bench_v2.py`, is better then origin [Cristian Garcia](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95) method in `client/bench.py` file , just in memory usage, he lees then it almost by `50%`, but other thing like the time he takes and the CUP usage they almost same.
 
 This chart explain some results for `bench.py` VS `bench_v2`, in Memory usage by diffracts request count:
+![bench_v1 VS bench_v2](./docs/image.png)
+
+> Like we see V2 in `bench_v2.py` wins :muscle:
+
+```shell
+# For 100K Request
+
+# bench.py
+./timed.sh python bench.py 100_000
+# Memory usage: 402924KB  Time: 157.43s    CPU usage: 44%
+
+# bench_v2.py
+./timed.sh python bench_v2.py 100_000
+# Memory usage: 206204KB  Time: 154.36s    CPU usage: 31%
+```
+
+```shell
+# For 1M Request
+
+# bench.py
+./timed.sh python bench.py 1_000_000
+# Memory usage: 3639804KB Time: 1551.67s   CPU usage: 38%
+
+# bench_v2.py
+./timed.sh python bench_v2.py 1_000_000
+# Memory usage: 1607608KB Time: 1522.06s   CPU usage: 30%
+```
 
 # Setup
 
@@ -94,7 +121,7 @@ Each service is separated in different container, `client` and `server`, you can
 
 - **Server service**: in `./server` it contain `./server/server.py` which functions as a simple `HTTP` server using [aiohttp](https://docs.aiohttp.org/en/stable/), we create a http://localhost:8080/{name} route, he simply have a delay with a random time between `1-3` second and return a response with the name you pass.
 
-- **Client service**: in `./client`, includes the original method(`./client/bench.py`) by [Cristian Garcia](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95), and the enhanced version (`./client/bench_v2.py`) with `asyncio.Semaphore`, we use `timed.sh` script to calc the python app time taken and also the CPU and Memory usage, `./client/benchmark_log.txt` this is a log file
+- **Client service**: in `./client`, includes the original method(`./client/bench.py`) by [Cristian Garcia](https://medium.com/@cgarciae/making-an-infinite-number-of-requests-with-python-aiohttp-pypeln-3a552b97dc95), and the enhanced version (`./client/bench_v2.py`) with `asyncio.Semaphore`, we use `timed.sh` script to calc the python app time taken and also the CPU and Memory usage
 
 ### Setting Up Local Server & Client
 
@@ -144,10 +171,10 @@ docker exec -it <container name> sh
 
 ### Running Tests
 
-Use `./client/timed.sh` to measure the Python app's runtime, CPU, and Memory usage. For example:
+- Use `./client/timed.sh` to measure the Python app's runtime, CPU, and Memory usage. For example:
 
-```shell
-./timed.sh python bench.py 10000
-```
+  ```shell
+  ./timed.sh python bench.py 10000
+  ```
 
-Results will be printed in ./client/benchmark_log.txt and displayed in the terminal.
+- > `bench.py` and `bench_v2.py` takes the request count as a parameter

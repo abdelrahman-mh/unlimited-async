@@ -1,5 +1,7 @@
-- [ ] User multi threading or processing to maximize the number of requests ber second
+- [ ] Enhance Methods for more requests pre second and less resources usage
+- [ ] Make the tests environment more isolated
 - [ ] Use profiling tools
-- [ ] With python, create a chart app, that read the `benchmark_log.txt` file and handle it with a GUI chart
+- [ ] Enhance or change the app that calc resources usage of a python running app, and make it log the results to a log file for example `./client/benchmark_log.txt`
+  - - [ ] With python, create a chart app, that read the `benchmark_log.txt` file and handle it with a GUI chart
 - [ ] Make the Chart draw more better
 - [ ] Add more tests includes a large amount of request, like 10M, 100M

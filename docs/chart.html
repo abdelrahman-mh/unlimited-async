@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Method Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas
+      id="memChart"
+      width="800"
+      height="600"></canvas>
+    <canvas
+      id="memLineChart"
+      width="800"
+      height="600"></canvas>
+
+    <script>
+      function sizeFormat(sizeInKB) {
+        if (sizeInKB < 1024) {
+          return sizeInKB + ' KB';
+        } else if (sizeInKB < 1024 * 1024) {
+          return (sizeInKB / 1024).toFixed(2) + ' MB';
+        } else if (sizeInKB < 1024 * 1024 * 1024) {
+          return (sizeInKB / (1024 * 1024)).toFixed(2) + ' GB';
+        } else {
+          return (sizeInKB / (1024 * 1024 * 1024)).toFixed(2) + ' TB';
+        }
+      }
+
+      let labels = ['10K', '100K', '200K', '500K', '1M'];
+
+      let time1 = [18.33, 157.43, 314.23, 776.5, 1551.67];
+      let time2 = [17.75, 154.36, 305.6, 763.01, 1522.06];
+
+      let cpu1 = [32, 44, 50, 46, 38];
+      let cpu2 = [19, 31, 38, 44, 30];
+
+      let mem1 = [75920, 402924, 764824, 1834304, 3639804]; // with KB
+      let mem2 = [62888, 206204, 365400, 838940, 1607608];
+
+      // line chart
+      var memData = {
+        labels,
+        datasets: [
+          {
+            label: 'Bench-V1',
+            data: mem1,
+            fill: false,
+            borderColor: 'red',
+            tension: 0.1,
+          },
+          {
+            label: 'Bench-V2',
+            data: mem2,
+            fill: false,
+            borderColor: 'blue',
+            tension: 0.1,
+          },
+        ],
+      };
+
+      var memConfig = {
+        type: 'line',
+        data: memData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function (value, index, values) {
+                  return sizeFormat(value);
+                },
+              },
+            },
+          },
+        },
+      };
+
+      var memLineChart = new Chart(document.getElementById('memChart'), memConfig);
+
+      // bar chart
+      var memDataBar = {
+        labels,
+        datasets: [
+          {
+            label: 'Bench-V1',
+            data: mem1,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'red',
+            borderWidth: 1,
+          },
+          {
+            label: 'Bench-V2',
+            data: mem2,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'blue',
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      var memConfigBar = {
+        type: 'bar',
+        data: memDataBar,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function (value, index, values) {
+                  return sizeFormat(value);
+                },
+              },
+            },
+          },
+        },
+      };
+
+      var memBarChart = new Chart(document.getElementById('memLineChart'), memConfigBar);
+    </script>
+  </body>
+</html>

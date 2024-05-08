@@ -7,7 +7,7 @@ services:
     volumes:
       - server_data:/app
     networks:
-      - my_network
+      - unlimited_async_network
 
   client:
     build:
@@ -17,7 +17,7 @@ services:
     volumes:
       - client_data:/app
     networks:
-      - my_network
+      - unlimited_async_network
 
 networks:
   unlimited_async_network:
